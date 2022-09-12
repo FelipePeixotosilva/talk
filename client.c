@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:44:42 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/10 19:23:59 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/12 20:05:25 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,19 @@
 
 int convert(int number, int pid)
 {
-    int casa = number;
-    int cont = 1;
-    while(casa > 0)
+    if(number < 2)
     {
-        casa = casa / 2;
-        cont++;
-    }
-    while(cont > 0)
-    {
-        if(number % 2 == 1)
-        {
+        if(number == 1)
             kill(pid,SIGUSR1);
-        }
         else
-        {
             kill(pid,SIGUSR2);
-        }
         usleep(100);
-        number=number / 2;
-        cont--;
     }
+    else
+    {
+        convert(number / 2, pid);
+        convert(number % 2, pid);
+    }       
 }
 int	ft_atoi(const char *nptr)
 {
@@ -65,5 +57,5 @@ int	ft_atoi(const char *nptr)
 int main(int argc, char *argv[])
 {
     int pid = ft_atoi(argv[1]);
-    convert(65, pid);
+    convert(ft_atoi(argv[2]), pid);
 }
