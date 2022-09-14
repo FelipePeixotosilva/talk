@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:44:42 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/13 20:30:14 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/13 21:25:32 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ void convert(int number, int pid)
 	int i;
 	
 		i=0;
+	while(i < 8)
+	{
 	   if(number & (128 >> i))
 	   {
 	   		kill(pid,SIGUSR1);
-			i++;
 	   }
 	   else
 	   {
 		   kill(pid,SIGUSR2);
-		   i++;
 	   }
+	   usleep(280);
+		i++;
+	}
 	   printf("%d\n",i);
 }
 int	ft_atoi(const char *nptr)
@@ -59,5 +62,11 @@ int	ft_atoi(const char *nptr)
 int main(int argc, char *argv[])
 {
     int pid = ft_atoi(argv[1]);
-    convert(ft_atoi(argv[2]), pid);
+	int i;
+
+	while (argv[2][i])
+	{
+    	convert(argv[2], pid);
+		i++;
+	}
 }
