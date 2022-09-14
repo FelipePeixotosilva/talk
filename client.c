@@ -6,28 +6,30 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:44:42 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/12 20:05:25 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:30:14 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <signal.h>
+#include <stdio.h>
 
-int convert(int number, int pid)
+void convert(int number, int pid)
 {
-    if(number < 2)
-    {
-        if(number == 1)
-            kill(pid,SIGUSR1);
-        else
-            kill(pid,SIGUSR2);
-        usleep(100);
-    }
-    else
-    {
-        convert(number / 2, pid);
-        convert(number % 2, pid);
-    }       
+	int i;
+	
+		i=0;
+	   if(number & (128 >> i))
+	   {
+	   		kill(pid,SIGUSR1);
+			i++;
+	   }
+	   else
+	   {
+		   kill(pid,SIGUSR2);
+		   i++;
+	   }
+	   printf("%d\n",i);
 }
 int	ft_atoi(const char *nptr)
 {
