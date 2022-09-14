@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:52:06 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/13 20:49:01 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/13 21:17:46 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,17 @@ int	ft_atoi(const char *nptr)
 void handler(int sig)
 {
 	static int nbr;
-	static char c;
+	static unsigned char c;
 
-	nbr = 0;
     if(sig == SIGUSR1)
 	{
 		c = c | (128 >> nbr);
-		nbr++;
 	}
-	printf("%d", nbr);
-	if(nbr == 7)
+	nbr++;
+	//printf("%d\n", nbr);
+	if(nbr == 8)
 	{
-		printf("Caracter:");
+		//printf("Caracter:");
 		write(1,&c,1);
 		printf("\n");
 	}        
