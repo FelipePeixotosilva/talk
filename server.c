@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:52:06 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/12 18:42:00 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:49:01 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-
-static char nbr[7];
-static int val = 0;
 
 int	ft_atoi(const char *nptr)
 {
@@ -43,15 +40,25 @@ int	ft_atoi(const char *nptr)
 	}	
 	return (j * s);
 }
+
 void handler(int sig)
 {
-    printf("\n");
+	static int nbr;
+	static char c;
+
+	nbr = 0;
     if(sig == SIGUSR1)
-        printf("1");
-    else if(sig == SIGUSR2)
-        printf("0");
-    printf("\n");
-    val++;
+	{
+		c = c | (128 >> nbr);
+		nbr++;
+	}
+	printf("%d", nbr);
+	if(nbr == 7)
+	{
+		printf("Caracter:");
+		write(1,&c,1);
+		printf("\n");
+	}        
 }
 int main()
 {
