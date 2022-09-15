@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:44:42 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/13 21:25:32 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:20:08 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void convert(int number, int pid)
 	   {
 		   kill(pid,SIGUSR2);
 	   }
-	   usleep(280);
+	   usleep(1000);
 		i++;
 	}
-	   printf("%d\n",i);
+	 //  printf("%d\n",i);
 }
 int	ft_atoi(const char *nptr)
 {
@@ -64,9 +64,11 @@ int main(int argc, char *argv[])
     int pid = ft_atoi(argv[1]);
 	int i;
 
+	(void)argc;
+	i = 0;
 	while (argv[2][i])
 	{
-    	convert(argv[2], pid);
+    	convert(argv[2][i], pid);
 		i++;
 	}
 }
