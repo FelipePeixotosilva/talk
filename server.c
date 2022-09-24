@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:52:06 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/24 18:52:54 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:24:00 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ void	handler(int sig)
 
 int	main(void)
 {
-	int	pid;
-	struct sigaction action;
-	
+	struct sigaction	action;
+	int					pid;
+
 	action.sa_handler = handler;
 	pid = getpid();
 	ft_printf("My pid:%d\n", pid);
-	
 	while (1)
 	{
-		sigaction(SIGUSR1,&action,NULL);
-		sigaction(SIGUSR2,&action,NULL);
+		sigaction (SIGUSR1, &action, NULL);
+		sigaction (SIGUSR2, &action, NULL);
 		pause();
 	}
 }
