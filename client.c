@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:44:42 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/24 16:49:44 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:28:22 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	convert(int number, int pid)
 {
-	int i;
+	int	i;
 	
 		i=0;
 	while(i < 8)
