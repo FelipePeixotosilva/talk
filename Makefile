@@ -1,34 +1,49 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/09/24 15:06:05 by fpeixoto          #+#    #+#              #
-#    Updated: 2022/09/24 15:18:51 by fpeixoto         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC = cc
+RM = rm -f
+CFLAGS = -Wall -Wextra -Werror
 
-SRCS	= client.c server.c
-OBJS	= $(SRCS:.c=.o)
-NAME	= minitalk.a
-CC		= cc 
-RM		= rm -f 
-CFLAGS	= -Wall -Wextra -Werror
+NAME = minitalk
 
-.c.o:
-		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+CLIENT    = client
+SERVER    = server
 
-$(NAME): $(OBJS)
-		ar rc $(NAME) $(OBJS)
-all: $(NAME)
+LIBFT    =    ./libs/libft/libft.a
+LIBFT_DIR    =    ./libs/libft
 
-clean :
-	$(RM) $(OBJS)
+PRINTF    = ./libs/ft_printf/libftprintf.a
+PRINTF_DIR = ./libs/ft_printf
+
+SRC_C = client.c
+SRC_S = server.c
+
+INC_LIBFT    = -I. -I$(LIBFT_DIR)
+INC_PRINTF    = -I. -I$(PRINTF_DIR)
+
+all:    $(CLIENT) $(SERVER)
+
+$(NAME): all
+
+
+$(CLIENT): $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(SRC_C) $(LIBFT) $(INC_LIBFT) $(PRINTF) $(INC_PRINTF) -o $(CLIENT)
+
+$(SERVER): $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(SRC_S) $(LIBFT) $(INC_LIBFT) $(PRINTF) $(INC_PRINTF) -o $(SERVER)
+
+$(LIBFT):
+	$(MAKE) -C ./libs/libft
+
+$(PRINTF):
+	$(MAKE) -C ./libs/ft_printf
+
+clean:
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) fclean -C $(PRINTF_DIR)
+	$(RM) $(CLIENT) $(SERVER) 
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(CLIENT) $(SERVER) 
 
-re: fclean all
-.PHONY: all clean fclean re
+re: fclean $(NAME)
+
+.PHONY: all clean fclean re bonus
