@@ -6,15 +6,13 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 13:44:42 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/14 20:20:08 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:49:44 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include <stdio.h>
+#include "minitalk.h"
 
-void convert(int number, int pid)
+void	convert(int number, int pid)
 {
 	int i;
 	
@@ -29,46 +27,29 @@ void convert(int number, int pid)
 	   {
 		   kill(pid,SIGUSR2);
 	   }
-	   usleep(1000);
+	   usleep(250);
 		i++;
 	}
-	 //  printf("%d\n",i);
-}
-int	ft_atoi(const char *nptr)
-{
-	size_t	i;
-	int		s;
-	int		j;
-
-	i = 0;
-	s = 1;
-	j = 0;
-	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || (nptr[i] == 32))
-		i++;
-	if (nptr[i] == '-')
-	{
-		s = -1;
-		i++;
-	}	
-	else if (nptr[i] == '+')
-		i++;
-	while ((nptr[i] != '\0'))
-	{
-		j = j * 10 + (nptr[i] - '0');
-		i++;
-	}	
-	return (j * s);
 }
 int main(int argc, char *argv[])
 {
-    int pid = ft_atoi(argv[1]);
+    int pid;
 	int i;
+	pid = ft_atoi(argv[1]);
 
-	(void)argc;
-	i = 0;
-	while (argv[2][i])
+	if(argc == 3)
 	{
-    	convert(argv[2][i], pid);
-		i++;
+		i = 0;
+		while (argv[2][i])
+		{
+    		convert(argv[2][i], pid);
+			i++;
+		}
+	}
+	else
+	{
+		ft_printf("Problem parameter:");
+		ft_printf("Name_program,PID and string");
+		ft_printf("\n");
 	}
 }
