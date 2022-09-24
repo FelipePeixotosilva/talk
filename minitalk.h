@@ -6,7 +6,7 @@
 /*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:31:10 by fpeixoto          #+#    #+#             */
-/*   Updated: 2022/09/24 15:39:02 by fpeixoto         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:56:18 by fpeixoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
+# include "./libs/libft/libft.h"
+# include "./libs/ft_printf/ft_printf.h"
 
 #endif
