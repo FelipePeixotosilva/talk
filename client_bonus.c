@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fpeixoto <fpeixoto@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/10 13:44:42 by fpeixoto          #+#    #+#             */
+/*   Updated: 2022/09/27 20:27:41 by fpeixoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minitalk.h"
+
+void reseveid_msg(int sig)
+{
+    if(sig == SIGUSR1)
+        ft_printf("OK!");  
+}
+void	convert(int number, int pid)
+{
+	int	i;
+	
+		i=0;
+	while(i < 8)
+	{
+	   if(number & (128 >> i))
+	   {
+	   		kill(pid,SIGUSR1);
+	   }
+	   else
+	   {
+		   kill(pid,SIGUSR2);
+	   }
+	   usleep(600);
+		i++;
+	}
+}
+int main(int argc, char *argv[])
+{
+    int pid;
+	int i;
+
+	signal(SIGUSR1, reseveid_msg);
+	if(argc == 3)
+	{
+		pid = ft_atoi(argv[1]);
+		i = 0;
+		while (argv[2][i])
+		{
+    		convert(argv[2][i], pid);
+			i++;
+		}
+		convert(argv[2][i], pid);
+	}
+	else
+	{
+		ft_printf("Problem parameter:");
+		ft_printf("Name_program,PID and string");
+		ft_printf("\n");
+	}
+}
